@@ -1,5 +1,6 @@
 package calculator;
 
+<<<<<<< HEAD
 public class Calculator {
 
     private static int DIGIT_RANGE = 2;
@@ -44,5 +45,30 @@ public class Calculator {
         }
         return Math.round((number1 / number2) * Math.pow(10, DIGIT_RANGE)) / Math.pow(10,
             DIGIT_RANGE);
+=======
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class Calculator {
+
+    private final List<Double> numbers;
+    private final List<String> operators;
+
+    public Calculator(List<String> numbers, List<String> operators) {
+        this.numbers = numbers.stream().map(Double::parseDouble)
+            .collect(Collectors.toCollection(LinkedList::new));
+        this.operators = operators;
+    }
+
+    public Double execute() {
+        Double result = numbers.get(0);
+        numbers.remove(0);
+        for (final String operator : operators) {
+            result = Operator.operatorOf(operator).apply(result, numbers.get(0));
+            numbers.remove(0);
+        }
+        return result;
+>>>>>>> a80a2bb801c40c45a660a7e8d79fc3cde75d2215
     }
 }
